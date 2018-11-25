@@ -1,0 +1,105 @@
+<form [formGroup]="regForm">
+<div class="card contact">
+  <div class="card-body">
+    <h5 class="card-title">Регистрация</h5>
+
+    <mat-form-field>
+      <input matInput placeholder="Имя" autocomplete="off"
+      formControlName="name">
+      <mat-error *ngIf="isControlInvalid('name','required')">
+        Это обязательное поле
+      </mat-error>
+      <mat-error *ngIf="isControlInvalid('name','pattern')">
+        Доступны только буквы латинского алфавита и кирилица
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput placeholder="Фамилия" autocomplete="off"
+      formControlName="lastName">
+      <mat-error *ngIf="isControlInvalid('lastName','required')">
+        Это обязательное поле
+      </mat-error>
+      <mat-error *ngIf="isControlInvalid('lastName','pattern')">
+        Доступны только буквы латинского алфавита и кирилица
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput placeholder="Никнейм" autocomplete="off"
+      formControlName="nickname">
+      <mat-error *ngIf="isControlInvalid('nickname','required')">
+        Это обязательное поле
+      </mat-error>
+      <mat-error *ngIf="isControlInvalid('nickname','pattern')">
+        Доступны только буквы латинского алфавита, кирилица и цифры
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput [matDatepicker]="picker" placeholder="Дата рождения"
+      formControlName="birthdate">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+      <mat-error *ngIf="isControlInvalid('birthdate','required')">
+        Это обязательное поле
+      </mat-error>
+    </mat-form-field>
+
+  </div>
+</div>
+
+<div class="card main">
+  <div class="card-body">
+    <h5 class="card-title" style="visibility: hidden;">Регистрация</h5>
+
+    <mat-form-field>
+      <input matInput placeholder="Логин" autocomplete="off"
+      formControlName="login">
+      <mat-error *ngIf="isControlInvalid('login','required')">
+        Это обязательное поле
+      </mat-error>
+      <mat-error *ngIf="isControlInvalid('login','pattern')">
+          Доступны только буквы латинского алфавита, кирилица, цифры и симвролы _ @ . -
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput placeholder="Пароль" autocomplete="off" formControlName="password"
+      [type]="hidePassword ? 'password' : 'text'">
+      <mat-icon matSuffix (click)="hidePassword = !hidePassword" class="hide">
+        {{hidePassword ? 'visibility_off' : 'visibility'}}
+      </mat-icon>
+      <mat-error *ngIf="isControlInvalid('password','required')">
+        Это обязательное поле
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput placeholder="Повторите пароль" autocomplete="off"
+      formControlName="confirmPassword" [type]="hidePassword ? 'password' : 'text'">
+      <mat-error *ngIf="isControlInvalid('confirmPassword','required')">
+        Это обязательное поле
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-select placeholder="Страна" formControlName="country">
+        <mat-option *ngFor="let country of countries" [value]="country">
+          {{country}}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="isControlInvalid('country','required')">
+        Это обязательное поле
+      </mat-error>
+    </mat-form-field>
+  </div>
+</div>
+</form>
+
+<div class="submit-block">
+  <button mat-raised-button color="primary" class="submit" 
+  [disabled]="!regForm.valid" (click)="submit()">
+    Зарегистрироваться
+  </button>
+</div>

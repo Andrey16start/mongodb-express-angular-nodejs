@@ -1,0 +1,40 @@
+<div class="wrapper">
+  <mat-card class="search-header">
+    <mat-card-header class="search-block">
+      <mat-form-field class="search-input">
+        <input matInput placeholder="Имя, фамилия или никнейм"
+        [(ngModel)]="searchInputValue" autocomplete="off">
+      </mat-form-field>
+
+      <button mat-mini-fab color="primary" matTooltip="Поиск" (click)="search()">
+        <mat-icon>search</mat-icon>
+      </button>
+      
+      <button mat-mini-fab color="primary" matTooltip="Сбросить поиск"
+      class="reset-search" (click)="reset()">
+        <mat-icon>autorenew</mat-icon>
+      </button>
+    </mat-card-header>
+  </mat-card>
+
+  <div *ngFor="let user of users | paginate: { itemsPerPage: 6, currentPage: p }">
+    <mat-card class="search-result" routerLink="/user/{{user.userInfo.nickname}}">
+      <mat-card-header>
+        <img src="https://www.freeiconspng.com/uploads/customers-icon-3.png"
+        mat-card-avatar>
+        <mat-card-title>
+          {{user.userInfo.name}}
+          {{user.userInfo.lastName}}
+        </mat-card-title>
+        <mat-card-subtitle> {{user.userInfo.nickname}} </mat-card-subtitle>
+      </mat-card-header>
+    </mat-card>
+  </div>
+
+  <div style="margin-bottom: 20px;"></div>
+
+  <pagination-controls (pageChange)="p = $event" previousLabel="Назад"
+  nextLabel="Вперёд" maxSize="5"></pagination-controls>
+
+  <div style="margin-bottom: 30px;"></div>
+</div>

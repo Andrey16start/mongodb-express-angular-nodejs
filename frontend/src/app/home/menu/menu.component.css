@@ -1,0 +1,30 @@
+mat-card.menu-item{
+    width: 19%;
+    margin-left: 1%;
+    float: left;
+    clear: both;
+}
+
+mat-card.menu-item:hover{
+    cursor: pointer;
+    background: rgb(245,245,245);
+}
+
+mat-card.menu-item:active{
+    cursor: pointer;
+    background: rgb(225,225,225);
+}
+
+mat-card.menu-item mat-card-header{
+    margin-left: -40px;
+}
+
+mat-card.exit:hover{
+    cursor: pointer;
+    background-color: #ffd6d6;
+}
+
+mat-card.exit:active{
+    cursor: pointer;
+    background-color: #ffbdbd;
+}

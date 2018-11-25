@@ -1,0 +1,31 @@
+div.wrapper{
+    margin-left: 22%;
+    margin-right: 1%;
+}
+
+mat-card.search-header{
+    margin-bottom: 20px;
+}
+
+mat-form-field.search-input{
+    width: 60%;
+}
+
+button.reset-search{
+    margin-left: 10px;
+}
+
+mat-card-header.search-block{
+    display: flex;
+    align-items: center;
+}
+
+mat-card.search-result:hover{
+    cursor: pointer;
+    background: rgb(245,245,245);
+}
+
+mat-card.search-result:active{
+    cursor: pointer;
+    background: rgb(225,225,225);
+}

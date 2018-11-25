@@ -1,0 +1,21 @@
+.toolbar{
+    color: white;
+    height: 75px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.logo{
+    margin-left: 20px;
+    outline: none;
+}
+
+.logo:hover{
+    cursor: pointer;
+}
+
+.text{
+    margin-left: 10px;
+    font-size: 40px;
+}

@@ -1,0 +1,56 @@
+.wrapper{
+    margin-left: 22%;
+    margin-right: 1%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 2%;
+}
+
+mat-card.profile{
+    height: 700px;
+}
+
+mat-card.profile img{
+    border-radius: 100%;
+    max-width: 90%;
+}
+
+div.profile-avatar{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+mat-card-header.profile-info{
+    margin-top: 10px;
+}
+
+.profile-info-entity {
+    margin-left: -35px;
+    width: 70%; 
+}
+
+mat-card.profile mat-card-actions{
+    display: grid;
+    grid-template-columns: 1fr 1.3fr;
+}
+
+mat-card.friends{
+    height: 700px;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+mat-card.friends mat-list-item:hover{
+    cursor: pointer;
+    background: rgb(245,245,245);
+}
+
+mat-card.friends mat-list-item:active{
+    cursor: pointer;
+    background: rgb(225,225,225);
+}
+
+mat-spinner{
+    margin-left: 25%;
+}

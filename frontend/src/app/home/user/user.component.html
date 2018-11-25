@@ -1,0 +1,52 @@
+<div class="wrapper" *ngIf="user">
+    <mat-card class="profile">
+        <mat-card-header>
+            <mat-card-title>
+                {{user.userInfo.name}}
+                {{user.userInfo.lastName}}
+            </mat-card-title>
+            <mat-card-subtitle>Online</mat-card-subtitle>
+        </mat-card-header>
+
+        <div class="profile-avatar">
+            <img mat-card-image
+            src="https://www.freeiconspng.com/uploads/customers-icon-3.png">
+            <!-- src="https://cdn.kastatic.org/images/avatars/svg/leafers-seed.svg" -->
+        </div>
+
+        <mat-card-header class="profile-info">
+            <span class="profile-info-entity">Дата рождения</span>
+            <span> {{user.userInfo.birthdate}} </span>
+        </mat-card-header>
+        <mat-card-header class="profile-info">
+            <span class="profile-info-entity">Страна</span>
+            <span> {{user.userInfo.country}} </span>
+        </mat-card-header>
+        <mat-card-header class="profile-info">
+            <span class="profile-info-entity">Никнейм</span>
+            <span> {{user.userInfo.nickname}} </span>
+        </mat-card-header>
+
+        <mat-card-actions>
+            <button mat-raised-button color="primary">
+                <mat-icon>person_add</mat-icon>&nbsp;Добавить в друзья
+            </button>
+            <button mat-raised-button color="primary">
+                <mat-icon>mail</mat-icon>&nbsp;Отправить сообщение
+            </button>
+        </mat-card-actions>
+    </mat-card>
+
+    <mat-card class="friends">
+        <mat-card-header>
+            <mat-card-title>Друзья ({{user.friends.length}})</mat-card-title>
+        </mat-card-header>
+
+        <mat-list role="list" *ngFor="let friend of user.friends">
+            <mat-list-item role="listitem">Друг</mat-list-item>
+        </mat-list>
+
+    </mat-card>
+</div>
+
+<mat-spinner *ngIf="!user"></mat-spinner>

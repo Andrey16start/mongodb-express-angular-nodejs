@@ -1,0 +1,41 @@
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title">Авторизация</h5>
+
+    <form [formGroup]="loginForm">
+      <mat-form-field>
+        <input matInput placeholder="Логин" autocomplete="off"
+        formControlName="login">
+
+        <mat-error *ngIf="isControlInvalid('login','required')">
+          Это обязательное поле
+        </mat-error>
+        <mat-error *ngIf="isControlInvalid('login','pattern')">
+          Доступны только буквы латинского алфавита, кирилица, цифры и симвролы _ @ . -
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="Пароль" autocomplete="off"
+        formControlName="password" [type]="hidePassword ? 'password' : 'text'">
+        <mat-icon matSuffix (click)="hidePassword = !hidePassword" class="hide">
+          {{hidePassword ? 'visibility_off' : 'visibility'}}
+        </mat-icon>
+
+        <mat-error *ngIf="isControlInvalid('password','required')">
+          Это обязательное поле
+        </mat-error>
+        <mat-error *ngIf="isControlInvalid('password','pattern')">
+          Доступны только буквы латинского алфавита, кирилица и цифры
+        </mat-error>
+      </mat-form-field>
+    </form>
+
+    <button mat-raised-button color="primary" class="submit" (click)="submit()"
+    [disabled]="!loginForm.valid">
+      Войти
+    </button>
+    
+    <button mat-button routerLink="registration">Зарегистрироваться</button>
+  </div>
+</div>
