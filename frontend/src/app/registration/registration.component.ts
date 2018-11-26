@@ -74,21 +74,26 @@ export class RegistrationComponent implements OnInit {
       msg: []
     }
 
-    this.crudService.getAll().subscribe(value => {
-      console.log("GET запрос - нижe");
-      console.log(value);
-    });
-
     this.crudService.registration(obj).subscribe(value => {
-      console.log("POST запрос - ниже");
-      console.log(value);
       alert("Вы успешно зарегистрировались!");
       this.router.navigate(["/"]);
-    }, err => {
+    },
+    err => {
       console.log("Ошибка - ниже");
       console.log(err)
-      console.log(`Статус - ${err.status}`);
+
+      if(err.status == 406) 
+        return this.snackBar.open("Такой логин уже существует!", "Ошибка!", {
+          duration: 4000,
+        });
+
+      if(err.status == 409)
+        return this.snackBar.open("Такой никнейм уже существует!", "Ошибка!", {
+          duration: 4000,
+        });
+
     })
+
   }
 
 }

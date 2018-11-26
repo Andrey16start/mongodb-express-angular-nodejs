@@ -44,20 +44,41 @@ mongoClient.connect(url, function(err, client){
 
     // Регистрация
     app.post("/users", (req, res) => {
-        console.log(req.body);
+
         if ( verificationUser(req.body) ) {
-            res.status(201).send({Message: "Валидация прошла успешно, пользователь зарегистрирован"});
-            testCollection.insertOne(req.body, function(err, res){
-                if(err) console.log(err);
-            });
-            dbTestGetAll();
+            // Проверка на уникальность логина и никнейма
+            testCollection.find({"loginData.login" : req.body.loginData.login})
+            .toArray(function(err, result){
+                if (result[0] != undefined){
+                    res.status(406).send(); // Логин не прошёл
+                    return false;
+                } 
+                else {
+                    testCollection.find({"userInfo.nickname" : req.body.userInfo.nickname})
+                    .toArray(function(err, result){
+                        if (result[0] != undefined){
+                            res.status(409).send() // Никнейм не прошёл
+                            return false;
+                        }
+                        else {
+                            testCollection.insertOne(req.body, function(err, res2){
+                                if(err) return console.log(err);
+                                res.status(201).send(); // Валидация прошла
+                                dbTestGetAll();
+                            })
+                        }
+                    })
+                }
+            })
         }
         if ( !verificationUser(req.body) ) res.status(400);
     })
 
     // Авторизация
     app.post("/login", (req, res) => {
+
         if ( verificationLogin(req.body) ){
+
             testCollection.find({"loginData.login" : req.body.login,
             "loginData.password" : req.body.password}).toArray(function(err, result){
                 res.status(200).send(result);
@@ -68,6 +89,7 @@ mongoClient.connect(url, function(err, client){
 
     // Информация о авторизированном пользователе
     app.get("/login/:id", (req, res) => {
+
         let o_id = new mongo.ObjectID(req.params.id);
         testCollection.find({"_id" : o_id}).toArray(function(err, result){
             res.status(200).send(result);
@@ -75,6 +97,7 @@ mongoClient.connect(url, function(err, client){
     })
 
     app.get("/user/:nickname", (req, res) => {
+
         testCollection.find
         ({"userInfo.nickname" : req.params.nickname}).toArray(function(err, result){
             if (result.length == 0) return res.status(400).send();
