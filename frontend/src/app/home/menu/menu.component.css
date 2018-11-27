@@ -1,4 +1,4 @@
-mat-card.menu-item{
+/* mat-card.menu-item{
     width: 19%;
     margin-left: 1%;
     float: left;
@@ -27,4 +27,48 @@ mat-card.exit:hover{
 mat-card.exit:active{
     cursor: pointer;
     background-color: #ffbdbd;
+} */
+.menu-block{
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    margin-bottom: 10px;
+}
+
+.menu-item{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.menu-item:hover{
+    cursor: pointer;
+    background: rgb(245,245,245);
+}
+
+.menu-item:active{
+    cursor: pointer;
+    background: rgb(225,225,225);
+}
+
+.menu-item mat-card-header{
+    margin-left: -40px;
+}
+
+@media screen and (max-width: 900px){
+    .menu-block{
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media screen and (max-width: 450px){
+    .menu-block{
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media screen and (max-width: 300px){
+    .menu-block{
+        grid-template-columns: 1fr;
+    }
 }

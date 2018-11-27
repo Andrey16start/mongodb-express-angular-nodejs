@@ -1,56 +1,111 @@
 .wrapper{
-    margin-left: 22%;
-    margin-right: 1%;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-column-gap: 2%;
+    grid-row-gap: 10px;
+    grid-column-gap: 10px;
+}
+/* Profile */
+.profile{
+    display: grid;
 }
 
-mat-card.profile{
-    height: 700px;
-}
-
-mat-card.profile img{
-    border-radius: 100%;
-    max-width: 90%;
-}
-
-div.profile-avatar{
+.prifile-avatar{
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-mat-card-header.profile-info{
-    margin-top: 10px;
+.profile img{
+    border-radius: 100%;
+    max-width: 100%;
 }
 
-.profile-info-entity {
-    margin-left: -35px;
-    width: 70%; 
-}
-
-mat-card.profile mat-card-actions{
+.actions{
     display: grid;
-    grid-template-columns: 1fr 1.3fr;
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 10px;
+}
+/* Info */
+.info{
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 6fr;
+    grid-row-gap: 10px;
 }
 
-mat-card.friends{
-    height: 700px;
+.fullName{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.user-info mat-card-header:hover{
+    background: rgb(245,245,245);
+}
+/* Friends */
+.friends{
+    display: grid;
+    max-height: 550px;
+}
+
+.friends-list{
     overflow-x: hidden;
-    overflow-y: auto;
+    overflow-x: auto;
+    max-height: 400px;
 }
 
-mat-card.friends mat-list-item:hover{
+.friends .search{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.friends .search mat-form-field{
+    width: 70%;
+}
+
+.friends-list mat-card:hover{
     cursor: pointer;
     background: rgb(245,245,245);
 }
 
-mat-card.friends mat-list-item:active{
+.friends-list mat-card:active{
     cursor: pointer;
     background: rgb(225,225,225);
 }
+/* Feeds */
+.feeds{
+    display: grid;
+}
 
-mat-spinner{
-    margin-left: 25%;
+@media screen and (min-width: 600px) and (max-width: 950px){
+    .profile{
+        max-height: 350px;
+    }
+}
+
+@media screen and (min-width: 600px) and (max-width: 790px){
+    .actions{
+        grid-template-columns: 1fr;
+    }
+
+    .actions button{
+        margin-top: 20px;
+    }
+}
+
+@media screen and (max-width: 600px){
+    .wrapper{
+        grid-template-columns: 1fr;
+    }
+}
+
+@media screen and (max-width: 400px){
+    .actions{
+        grid-template-columns: 1fr;
+    }
+
+    .actions button{
+        margin-top: 20px;
+    }
 }

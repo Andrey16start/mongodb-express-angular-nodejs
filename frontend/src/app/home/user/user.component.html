@@ -1,52 +1,138 @@
 <div class="wrapper" *ngIf="user">
-    <mat-card class="profile">
-        <mat-card-header>
-            <mat-card-title>
-                {{user.userInfo.name}}
-                {{user.userInfo.lastName}}
-            </mat-card-title>
-            <mat-card-subtitle>Online</mat-card-subtitle>
-        </mat-card-header>
-
-        <div class="profile-avatar">
-            <img mat-card-image
-            src="https://www.freeiconspng.com/uploads/customers-icon-3.png">
-            <!-- src="https://cdn.kastatic.org/images/avatars/svg/leafers-seed.svg" -->
+    <div class="profile">
+        <div class="prifile-avatar">
+            <img mat-card-image src="https://www.freeiconspng.com/uploads/customers-icon-3.png">
+            <!-- https://www.freeiconspng.com/uploads/customers-icon-3.png -->
+            <!-- https://avatars1.githubusercontent.com/u/38696345?v=4 -->
         </div>
 
-        <mat-card-header class="profile-info">
-            <span class="profile-info-entity">Дата рождения</span>
-            <span> {{user.userInfo.birthdate}} </span>
-        </mat-card-header>
-        <mat-card-header class="profile-info">
-            <span class="profile-info-entity">Страна</span>
-            <span> {{user.userInfo.country}} </span>
-        </mat-card-header>
-        <mat-card-header class="profile-info">
-            <span class="profile-info-entity">Никнейм</span>
-            <span> {{user.userInfo.nickname}} </span>
-        </mat-card-header>
+        <div class="actions">
+            <button mat-raised-button color="primary">
+                Добавить в друзья
+                <mat-icon>person_add</mat-icon>
+            </button>
+            
+            <button mat-raised-button color="primary">
+                Написать сообщение
+                <mat-icon>mail</mat-icon>
+            </button>
+        </div>
+    </div>
 
-        <mat-card-actions>
-            <button mat-raised-button color="primary">
-                <mat-icon>person_add</mat-icon>&nbsp;Добавить в друзья
-            </button>
-            <button mat-raised-button color="primary">
-                <mat-icon>mail</mat-icon>&nbsp;Отправить сообщение
-            </button>
-        </mat-card-actions>
-    </mat-card>
+    <div class="info">
+        <mat-card class="fullName">
+            <mat-card-header>
+                <mat-card-title>
+                    {{user.userInfo.name}}
+                    {{user.userInfo.lastName}}
+                </mat-card-title>
+            </mat-card-header>
+        </mat-card>
+
+        <mat-card class="user-info">
+            <mat-card-header>
+                <mat-card-title>
+                    Дата рождения
+                </mat-card-title>
+                <mat-card-subtitle>
+                    {{user.userInfo.birthdate}}
+                </mat-card-subtitle>
+            </mat-card-header>
+
+            <mat-card-header>
+                <mat-card-title>
+                    Страна
+                </mat-card-title>
+                <mat-card-subtitle>
+                    {{user.userInfo.country}}
+                </mat-card-subtitle>
+            </mat-card-header>
+
+            <mat-card-header>
+                <mat-card-title>
+                    Никнейм
+                </mat-card-title>
+                <mat-card-subtitle>
+                    {{user.userInfo.nickname}}
+                </mat-card-subtitle>
+            </mat-card-header>
+        </mat-card>
+    </div>
 
     <mat-card class="friends">
         <mat-card-header>
-            <mat-card-title>Друзья ({{user.friends.length}})</mat-card-title>
+            <mat-card-title> Друзья (192) </mat-card-title>
         </mat-card-header>
 
-        <mat-list role="list" *ngFor="let friend of user.friends">
-            <mat-list-item role="listitem">Друг</mat-list-item>
-        </mat-list>
+        <div class="search">
+            <mat-form-field>
+                <input matInput autocomplete="off">
+            </mat-form-field>
 
+            <button mat-mini-fab color="primary" matTooltip="Поиск">
+                <mat-icon>search</mat-icon>
+            </button>
+        </div>
+
+        <div class="friends-list">
+            <mat-card>
+                <mat-card-header>
+                    <img src="https://www.freeiconspng.com/uploads/customers-icon-3.png" mat-card-avatar>
+                    <mat-card-title>
+                        Андрей Ильченко
+                    </mat-card-title>
+                    <mat-card-subtitle> admin </mat-card-subtitle>
+                </mat-card-header>
+            </mat-card>
+            <mat-card>
+                <mat-card-header>
+                    <img src="https://www.freeiconspng.com/uploads/customers-icon-3.png" mat-card-avatar>
+                    <mat-card-title>
+                        Андрей Ильченко
+                    </mat-card-title>
+                    <mat-card-subtitle> admin </mat-card-subtitle>
+                </mat-card-header>
+            </mat-card>
+            <mat-card>
+                <mat-card-header>
+                    <img src="https://www.freeiconspng.com/uploads/customers-icon-3.png" mat-card-avatar>
+                    <mat-card-title>
+                        Андрей Ильченко
+                    </mat-card-title>
+                    <mat-card-subtitle> admin </mat-card-subtitle>
+                </mat-card-header>
+            </mat-card>
+            <mat-card>
+                <mat-card-header>
+                    <img src="https://www.freeiconspng.com/uploads/customers-icon-3.png" mat-card-avatar>
+                    <mat-card-title>
+                        Андрей Ильченко
+                    </mat-card-title>
+                    <mat-card-subtitle> admin </mat-card-subtitle>
+                </mat-card-header>
+            </mat-card>
+            <mat-card>
+                <mat-card-header>
+                    <img src="https://www.freeiconspng.com/uploads/customers-icon-3.png" mat-card-avatar>
+                    <mat-card-title>
+                        Андрей Ильченко
+                    </mat-card-title>
+                    <mat-card-subtitle> admin </mat-card-subtitle>
+                </mat-card-header>
+            </mat-card>
+        </div>
     </mat-card>
+
+    <mat-card class="feeds">
+        <mat-card-header>
+            <mat-card-title>
+                Лента
+            </mat-card-title>
+        </mat-card-header>
+    </mat-card>
+
+    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Temporibus soluta molestias quod at unde nam facere similique neque aliquam possimus. At nostrum dolore quod nisi aliquam vitae veritatis vero quae molestias reprehenderit. Atque reiciendis, ut eligendi aut, qui rem sunt officia, odit placeat quisquam at. Corrupti error reiciendis tenetur possimus hic praesentium voluptatibus quas rerum suscipit? Asperiores provident iste assumenda maxime, laboriosam esse voluptates quisquam reprehenderit cum velit dolores placeat delectus nam temporibus molestiae aliquid exercitationem voluptate, dolore pariatur soluta nobis magni excepturi odit dolorum! Ipsum provident deleniti in eveniet alias consequatur atque magni esse distinctio voluptatum eius, consectetur animi placeat doloremque! Dignissimos blanditiis ipsum ad dicta tempore excepturi eaque et quidem provident! Illo porro incidunt repellat voluptate, corporis cumque aspernatur, ipsam quas ea saepe tenetur. Natus nostrum neque quidem unde sunt! Enim illum odio accusantium hic eos nesciunt incidunt, distinctio asperiores quis officiis quasi dolorum deleniti dignissimos, aperiam consequuntur quos fugiat harum dicta necessitatibus blanditiis earum quod mollitia dolor a. Sequi nulla quis quod iusto deserunt possimus error consectetur, recusandae voluptate praesentium voluptas quae labore corporis corrupti adipisci eligendi commodi nam similique quaerat distinctio voluptatibus minus minima ab soluta? Odit perspiciatis doloremque ratione molestias autem nam ab et commodi! Provident at iure qui, dolores quaerat atque quam suscipit voluptate sunt molestias iusto ipsam in illum quasi cum numquam esse, expedita sit! Voluptatem, laudantium. Sit aspernatur rem nobis voluptates officia, aperiam ad nesciunt quam odio cumque recusandae, minus obcaecati neque nostrum unde distinctio velit dolorem, in sint ratione deleniti est!
+
 </div>
 
 <mat-spinner *ngIf="!user"></mat-spinner>
