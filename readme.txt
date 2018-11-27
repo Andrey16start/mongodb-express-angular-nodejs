@@ -9,10 +9,8 @@
         3.)Web API - bodyParser + express.js
         
         Frontend
-        1.)Angular on typescript (Angular CLI 6.1.5)
-        2.)Angular Material, bootstrap
-        3.)HTML5, CSS3, js, es
-        4.)rxjs
+        1.)Логика / Logics - Angular 6.1.5 (CLI), JS, typescript, ecmascript 6
+        2.)Вёрстка / Design(page-proofs) - Angular Material, Bootstrap, HTML5, CSS3
         
         Как запустить / How to run
         Backend - npm run dev
