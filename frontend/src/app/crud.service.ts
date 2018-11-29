@@ -33,4 +33,10 @@ export class CrudService {
     return this.httpClient.get(`${this.apiUrl}user/${nickname}`);
   }
 
+  // Заявка в друзья
+  public addToFriends(from: string, to: string){
+    const obj = { from: from, to: to };
+    return this.httpClient.put(`${this.apiUrl}addToFriends`, obj);
+  }
+
 }

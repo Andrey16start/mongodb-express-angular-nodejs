@@ -70,7 +70,11 @@ export class RegistrationComponent implements OnInit {
         birthdate: date,
         country: form.country
       },
-      friends: [],
+      friends: {
+        friendsList: [],
+        outgoingRequest: [],
+        incomingRequest: []
+      },
       msg: []
     }
 

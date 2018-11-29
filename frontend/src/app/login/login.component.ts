@@ -52,10 +52,8 @@ export class LoginComponent implements OnInit {
       login: form.login,
       password: form.password
     }
-    console.log(obj);
+
     this.crudService.login(obj).subscribe(value => {
-      console.log("POST запрос - ниже");
-      console.log(value);
       if (!value[0])
       return this.snackBar.open("Неверный логин или пароль!", "Ошибка!", {
         duration: 4000,

@@ -75,6 +75,7 @@
 /* Feeds */
 .feeds{
     display: grid;
+    margin-bottom: 20px;
 }
 
 @media screen and (min-width: 591px) and (max-width: 950px){

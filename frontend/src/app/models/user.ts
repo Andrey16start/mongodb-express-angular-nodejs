@@ -18,9 +18,15 @@ export class Msg{
     date: string;
 }
 
+export class Friends{
+    friendsList: UserInfo[];
+    outgoingRequest: UserInfo[];
+    incomingRequest: UserInfo[];
+}
+
 export class User {
     loginData: LoginData;
     userInfo: UserInfo;
-    friends: UserInfo[];
+    friends: Friends;
     msg: Msg[];
 }

@@ -15,6 +15,7 @@ app.use( bodyParser.json() );
 app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    res.header('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');
     next();
 })
 
@@ -96,6 +97,7 @@ mongoClient.connect(url, function(err, client){
         })
     })
 
+    // Информация о другом пользователе по никнейму
     app.get("/user/:nickname", (req, res) => {
 
         testCollection.find
@@ -108,6 +110,47 @@ mongoClient.connect(url, function(err, client){
             }
             info = [info];
             res.status(200).send(info);
+        })
+    })
+
+    // Запрос в друзья
+    app.put("/addToFriends", (req, res) => {
+        let o_idFrom = new mongo.ObjectID(req.body.from);
+        let o_idTo = new mongo.ObjectID(req.body.to);
+
+        const from = {"_id" : o_idFrom};
+        const to = {"_id" : o_idTo};
+
+        testCollection.find(from).toArray(function(err, resultFrom){
+
+            testCollection.find(to).toArray(function(err, resultTo){
+
+                let arrFrom = resultFrom[0].friends.outgoingRequest;
+                let arrTo   = resultTo[0].friends.incomingRequest;
+
+                infoFrom = {
+                    userInfo: resultTo[0].userInfo,
+                    _id: req.body.to
+                }
+                infoTo = {
+                    userInfo: resultFrom[0].userInfo,
+                    _id: req.body.from
+                }
+
+                arrFrom[resultFrom[0].friends.outgoingRequest.length] = infoFrom;
+                arrTo[resultTo[0].friends.incomingRequest.length] = infoTo;
+                
+                let newValueFrom = { $set: {"friends.outgoingRequest" : arrFrom} };
+                let newValueTo = { $set: {"friends.incomingRequest": arrTo} };
+
+                testCollection.updateOne(from, newValueFrom, function(err, res){
+                })
+
+                testCollection.updateOne(to, newValueTo, function(err, res){
+                })
+
+                res.status(200).send();
+            })
         })
     })
 

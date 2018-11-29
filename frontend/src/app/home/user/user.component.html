@@ -1,4 +1,4 @@
-<div class="wrapper" *ngIf="user">
+<div class="wrapper" *ngIf="init">
     <div class="profile">
         <div class="prifile-avatar">
             <img mat-card-image src="https://www.freeiconspng.com/uploads/customers-icon-3.png">
@@ -7,11 +7,11 @@
         </div>
 
         <div class="actions">
-            <button mat-raised-button color="primary">
+            <button mat-raised-button color="primary" (click)="addToFriends()">
                 Добавить в друзья
                 <mat-icon>person_add</mat-icon>
             </button>
-            
+
             <button mat-raised-button color="primary">
                 Написать сообщение
                 <mat-icon>mail</mat-icon>
@@ -84,42 +84,6 @@
                     <mat-card-subtitle> admin </mat-card-subtitle>
                 </mat-card-header>
             </mat-card>
-            <mat-card>
-                <mat-card-header>
-                    <img src="https://www.freeiconspng.com/uploads/customers-icon-3.png" mat-card-avatar>
-                    <mat-card-title>
-                        Андрей Ильченко
-                    </mat-card-title>
-                    <mat-card-subtitle> admin </mat-card-subtitle>
-                </mat-card-header>
-            </mat-card>
-            <mat-card>
-                <mat-card-header>
-                    <img src="https://www.freeiconspng.com/uploads/customers-icon-3.png" mat-card-avatar>
-                    <mat-card-title>
-                        Андрей Ильченко
-                    </mat-card-title>
-                    <mat-card-subtitle> admin </mat-card-subtitle>
-                </mat-card-header>
-            </mat-card>
-            <mat-card>
-                <mat-card-header>
-                    <img src="https://www.freeiconspng.com/uploads/customers-icon-3.png" mat-card-avatar>
-                    <mat-card-title>
-                        Андрей Ильченко
-                    </mat-card-title>
-                    <mat-card-subtitle> admin </mat-card-subtitle>
-                </mat-card-header>
-            </mat-card>
-            <mat-card>
-                <mat-card-header>
-                    <img src="https://www.freeiconspng.com/uploads/customers-icon-3.png" mat-card-avatar>
-                    <mat-card-title>
-                        Андрей Ильченко
-                    </mat-card-title>
-                    <mat-card-subtitle> admin </mat-card-subtitle>
-                </mat-card-header>
-            </mat-card>
         </div>
     </mat-card>
 
@@ -130,9 +94,6 @@
             </mat-card-title>
         </mat-card-header>
     </mat-card>
-
-    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Temporibus soluta molestias quod at unde nam facere similique neque aliquam possimus. At nostrum dolore quod nisi aliquam vitae veritatis vero quae molestias reprehenderit. Atque reiciendis, ut eligendi aut, qui rem sunt officia, odit placeat quisquam at. Corrupti error reiciendis tenetur possimus hic praesentium voluptatibus quas rerum suscipit? Asperiores provident iste assumenda maxime, laboriosam esse voluptates quisquam reprehenderit cum velit dolores placeat delectus nam temporibus molestiae aliquid exercitationem voluptate, dolore pariatur soluta nobis magni excepturi odit dolorum! Ipsum provident deleniti in eveniet alias consequatur atque magni esse distinctio voluptatum eius, consectetur animi placeat doloremque! Dignissimos blanditiis ipsum ad dicta tempore excepturi eaque et quidem provident! Illo porro incidunt repellat voluptate, corporis cumque aspernatur, ipsam quas ea saepe tenetur. Natus nostrum neque quidem unde sunt! Enim illum odio accusantium hic eos nesciunt incidunt, distinctio asperiores quis officiis quasi dolorum deleniti dignissimos, aperiam consequuntur quos fugiat harum dicta necessitatibus blanditiis earum quod mollitia dolor a. Sequi nulla quis quod iusto deserunt possimus error consectetur, recusandae voluptate praesentium voluptas quae labore corporis corrupti adipisci eligendi commodi nam similique quaerat distinctio voluptatibus minus minima ab soluta? Odit perspiciatis doloremque ratione molestias autem nam ab et commodi! Provident at iure qui, dolores quaerat atque quam suscipit voluptate sunt molestias iusto ipsam in illum quasi cum numquam esse, expedita sit! Voluptatem, laudantium. Sit aspernatur rem nobis voluptates officia, aperiam ad nesciunt quam odio cumque recusandae, minus obcaecati neque nostrum unde distinctio velit dolorem, in sint ratione deleniti est!
-
 </div>
 
-<mat-spinner *ngIf="!user"></mat-spinner>
+<mat-spinner *ngIf="!init"></mat-spinner>
