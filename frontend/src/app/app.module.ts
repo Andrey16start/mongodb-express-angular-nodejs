@@ -14,6 +14,7 @@ import { HomeComponent } from './home/home.component';
 import { MenuComponent } from './home/menu/menu.component';
 import { SearchComponent } from './home/search/search.component';
 import { UserComponent } from './home/user/user.component';
+import { FriendsComponent } from './home/friends/friends.component';
 
 import { AppRoutingModule } from './app.routing.module';
 import { MaterialModule } from './material.module';
@@ -30,7 +31,8 @@ import { LoginService } from './login.service';
     HomeComponent,
     MenuComponent,
     SearchComponent,
-    UserComponent
+    UserComponent,
+    FriendsComponent
   ],
   imports: [
     BrowserModule,

@@ -14,6 +14,10 @@ export class UserComponent implements OnInit {
   init: boolean = false;
   user;
   subscription: Subscription;
+  justUser: boolean = true;
+  friend: boolean = false;
+  outgoing: boolean = false;
+  incoming: boolean = false;
 
   constructor(private activatedRoute: ActivatedRoute, private crudService: CrudService,
   private loginService: LoginService, private router: Router,
@@ -26,7 +30,35 @@ export class UserComponent implements OnInit {
         if(value[0]._id == this.loginService.getLogin()){
           return this.router.navigate(["/home"]);
         }
+        
         this.user = value[0];
+
+        let login = this.loginService.getLogin();
+        let friend = this.friend;
+        let outgoing = this.outgoing;
+        let justUser = this.justUser;
+        let incoming = this.incoming;
+
+        this.user.friends.friendsList.find(function(elem){
+          if (elem._id == login)
+            friend = true, justUser = false;
+        })
+        
+        this.user.friends.incomingRequest.find(function(elem){
+          if (elem._id == login)
+            outgoing = true, justUser = false;
+        })
+
+        this.user.friends.outgoingRequest.find(function(elem){
+          if(elem._id == login)
+            incoming = true, justUser = false;
+        })
+
+        this.justUser = justUser;
+        this.friend = friend;
+        this.outgoing = outgoing;
+        this.incoming = incoming;
+
         this.init = true;
       })
       
@@ -38,9 +70,27 @@ export class UserComponent implements OnInit {
     let to = this.user._id;
 
     this.crudService.addToFriends(from, to).subscribe(value => {
-      return this.snackBar.open("Заявка в друзья отправлена!", "", {
+      this.outgoing = true;
+      this.justUser = false;
+
+      this.snackBar.open("Заявка в друзья отправлена!", "", {
         duration: 4000,
       });
+    }, err => {
+      console.log(err);
+    })
+  }
+
+  confirmFriend(){
+    let from = this.user._id;
+    let to = this.loginService.getLogin();
+
+    this.crudService.confirmFriend(from, to).subscribe(value => {
+      this.snackBar.open("Заявка в друзья принята!", "", {
+        duration: 4000,
+      });
+      this.incoming = false;
+      this.friend = true;
     }, err => {
       console.log(err);
     })

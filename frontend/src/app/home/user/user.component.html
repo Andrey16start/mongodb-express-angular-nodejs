@@ -7,10 +7,18 @@
         </div>
 
         <div class="actions">
-            <button mat-raised-button color="primary" (click)="addToFriends()">
+            <button mat-raised-button color="primary" (click)="addToFriends()"
+            *ngIf="justUser">
                 Добавить в друзья
                 <mat-icon>person_add</mat-icon>
             </button>
+
+            <button mat-raised-button color="primary" *ngIf="incoming"
+            (click)="confirmFriend()">
+                Принять заявку
+            </button>
+            <button mat-raised-button color="warn" *ngIf="friend">Удалить из друзей</button>
+            <button mat-raised-button *ngIf="outgoing">Отменить заявку</button>
 
             <button mat-raised-button color="primary">
                 Написать сообщение

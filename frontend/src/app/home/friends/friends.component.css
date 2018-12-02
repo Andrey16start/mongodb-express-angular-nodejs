@@ -1,0 +1,59 @@
+.wrapper{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 10px;
+}
+
+.requests{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 10px;
+}
+
+.request{
+    margin-top: 20px;
+}
+
+.requests-block{
+    height: 80vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.request mat-card:hover{
+    background: rgb(245, 245, 245);
+}
+
+.request mat-card img:hover{
+    cursor: pointer;
+}
+
+.friends{
+    height: 80vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.friends-list{
+    overflow-x: hidden;
+    overflow-x: auto;
+    max-height: 400px;
+}
+
+.friends .search{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.friends .search mat-form-field{
+    width: 70%;
+}
+
+.friends-list mat-card:hover{
+    background: rgb(245,245,245);
+}
+
+.friends-list mat-card img:hover{
+    cursor: pointer;
+}

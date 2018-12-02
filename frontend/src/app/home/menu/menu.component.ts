@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from 'src/app/login.service';
 import { Router } from '@angular/router';
+import { CrudService } from 'src/app/crud.service';
 
 @Component({
   selector: 'app-menu',
@@ -8,11 +9,21 @@ import { Router } from '@angular/router';
   styleUrls: ['./menu.component.css']
 })
 export class MenuComponent implements OnInit {
+  incomingRequests;
 
-  constructor(private loginService: LoginService, private router: Router) { }
+  constructor(private loginService: LoginService, private router: Router,
+  private crudService: CrudService) { }
 
   ngOnInit() {
     if (!this.loginService.getLogin()) this.router.navigate(["/"]);
+    let id = this.loginService.getLogin();
+
+    this.crudService.getOne(id).subscribe(value => {
+      this.incomingRequests = value[0].friends.incomingRequest;
+      console.log(value[0]);
+    }, err => {
+      console.log(err);
+    })
   }
 
   exit(){

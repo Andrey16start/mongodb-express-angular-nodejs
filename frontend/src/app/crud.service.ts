@@ -39,4 +39,10 @@ export class CrudService {
     return this.httpClient.put(`${this.apiUrl}addToFriends`, obj);
   }
 
+  // Подтверждение заявки в друзья
+  public confirmFriend(from: string, to: string){
+    const obj = {from: from, to: to};
+    return this.httpClient.put(`${this.apiUrl}confirmFriend`, obj);
+  }
+
 }

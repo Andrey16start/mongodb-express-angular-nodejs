@@ -64,13 +64,11 @@
 }
 
 .friends-list mat-card:hover{
-    cursor: pointer;
     background: rgb(245,245,245);
 }
 
-.friends-list mat-card:active{
+.friends-list mat-card img:hover{
     cursor: pointer;
-    background: rgb(225,225,225);
 }
 /* Feeds */
 .feeds{

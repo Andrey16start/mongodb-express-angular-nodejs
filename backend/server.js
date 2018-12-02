@@ -154,4 +154,62 @@ mongoClient.connect(url, function(err, client){
         })
     })
 
+    // Подтверждение заявки в друзья
+    app.put("/confirmFriend", (req, res) => {
+        let o_idFrom = new mongo.ObjectID(req.body.from);
+        let o_idTo = new mongo.ObjectID(req.body.to);
+
+        const from = {"_id" : o_idFrom};
+        const to = {"_id" : o_idTo};
+
+        testCollection.find(from).toArray(function(err, resultFrom){
+
+            testCollection.find(to).toArray(function(err, resultTo){
+
+                let requestFrom = resultFrom[0].friends.outgoingRequest;
+                let requestTo = resultTo[0].friends.incomingRequest;
+                let frinedsFrom = resultFrom[0].friends.friendsList;
+                let friendsTo = resultTo[0].friends.friendsList;
+
+                let i = 0;
+                requestFrom.find(function(elem, index){
+                    if (elem._id == req.body.to)
+                        i = index;
+                })
+                requestFrom.splice(i, 1);
+                i = 0;
+                requestTo.find(function(elem, index){
+                    if (elem._id == req.body.from)
+                        i = index;
+                })
+                requestTo.splice(i, 1);
+
+                infoFrom = {
+                    userInfo: resultTo[0].userInfo,
+                    _id: req.body.to
+                }
+                infoTo = {
+                    userInfo: resultFrom[0].userInfo,
+                    _id: req.body.from
+                }
+
+                frinedsFrom[frinedsFrom.length] = infoFrom;
+                friendsTo[friendsTo.length] = infoTo;
+                
+                let newValueFrom = { $set: {"friends.outgoingRequest" : requestFrom,
+                                            "friends.friendsList" : frinedsFrom } };
+
+                let newValueTo = { $set : {"friends.incomingRequest" : requestTo,
+                                           "friends.friendsList" : friendsTo} };
+
+                testCollection.updateOne(from, newValueFrom, function(err, res){
+                })
+                testCollection.updateOne(to, newValueTo, function(err, res){
+                })
+
+                res.status(200).send();
+            })
+        })
+    })
+
 })

@@ -9,14 +9,20 @@
   <mat-card class="menu-item">
     <mat-card-header>
       <img src="../../../assets/outline-mail-24px.svg">
-      <span matBadge="79" matBadgeOverlap="false" matBadgeColor="warn">Сообщения</span>
+      <span>Сообщения</span>
     </mat-card-header>
   </mat-card>
 
-  <mat-card class="menu-item">
-    <mat-card-header>
+  <mat-card class="menu-item" routerLink="/friends" *ngIf="incomingRequests">
+    <mat-card-header *ngIf="incomingRequests.length">
       <img src="../../../assets/outline-group-24px.svg">
-      <span matBadge="4" matBadgeOverlap="false" matBadgeColor="warn">Друзья</span>
+      <span matBadge="{{incomingRequests.length}}" matBadgeOverlap="false"
+      matBadgeColor="warn">Друзья</span>
+    </mat-card-header>
+
+    <mat-card-header *ngIf="!incomingRequests.length">
+      <img src="../../../assets/outline-group-24px.svg">
+      <span>Друзья</span>
     </mat-card-header>
   </mat-card>
 
