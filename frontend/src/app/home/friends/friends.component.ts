@@ -51,8 +51,51 @@ export class FriendsComponent implements OnInit {
       this.user.friends.incomingRequest.splice(indexIncoming, 1);
       this.user.friends.friendsList.push(info);
 
-      this.snackBar.open("Заявка в друзья принята!", "", {
+      this.snackBar.open("Запрос в друзья принята!", "", {
         duration: 4000,
+      });
+    }, err => {
+      console.log(err);
+    })
+  }
+
+  refuseRequest(id){
+    let from = id;
+    let to = this.loginService.getLogin();
+
+    this.crudService.removeRequestToFrineds(from, to).subscribe(value => {
+      let indexIncoming;
+
+      this.user.friends.incomingRequest.find(function(elem, index){
+        if (elem._id == id)
+          indexIncoming = index;
+      })
+
+      this.user.friends.incomingRequest.splice(indexIncoming, 1);
+
+      this.snackBar.open("Запрос в друзья отклонён!", "", {
+        duration: 4000,
+      });
+    }, err => {
+      console.log(err);
+    })
+  }
+
+  removeRequestToFrineds(id){
+    let from = this.loginService.getLogin();
+    let to = this.user._id;
+
+    this.crudService.removeRequestToFrineds(from, to).subscribe(value => {
+      let indexOutgoing;
+
+      this.user.friends.outgoingRequest.find(function(elem, index){
+        if (elem._id == id)
+          indexOutgoing = index;
+      })
+      this.user.friends.outgoingRequest.splice(indexOutgoing, 1);
+
+      this.snackBar.open("Запрос в друзья отменена!", "", {
+        duration: 4000
       });
     }, err => {
       console.log(err);

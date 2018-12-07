@@ -45,4 +45,16 @@ export class CrudService {
     return this.httpClient.put(`${this.apiUrl}confirmFriend`, obj);
   }
 
+  // Отказать || Отменить запрос в друзья
+  public removeRequestToFrineds(from: string, to: string){
+    const obj = {from: from, to: to};
+    return this.httpClient.put(`${this.apiUrl}removeRequestToFriends`, obj);
+  }
+
+  // Удалить из друзей
+  public deleteFromFriends(from: string, to: string){
+    const obj = {from: from, to: to};
+    return this.httpClient.put(`${this.apiUrl}deleteFromFriends`, obj);
+  }
+
 }

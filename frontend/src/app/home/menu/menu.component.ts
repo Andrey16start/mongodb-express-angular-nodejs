@@ -12,21 +12,22 @@ export class MenuComponent implements OnInit {
   incomingRequests;
 
   constructor(private loginService: LoginService, private router: Router,
-  private crudService: CrudService) { }
+    private crudService: CrudService) { }
 
   ngOnInit() {
     if (!this.loginService.getLogin()) this.router.navigate(["/"]);
-    let id = this.loginService.getLogin();
+    else {
+      let id = this.loginService.getLogin();
 
-    this.crudService.getOne(id).subscribe(value => {
-      this.incomingRequests = value[0].friends.incomingRequest;
-      console.log(value[0]);
-    }, err => {
-      console.log(err);
-    })
+      this.crudService.getOne(id).subscribe(value => {
+        this.incomingRequests = value[0].friends.incomingRequest;
+      }, err => {
+        console.log(err);
+      })
+    }
   }
 
-  exit(){
+  exit() {
     this.loginService.clearLogin();
     this.loginService.setLoginState(false);
     this.router.navigate(["/"])

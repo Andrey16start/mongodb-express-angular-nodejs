@@ -22,6 +22,7 @@ app.use(function (req, res, next) {
 app.listen(port, () => {
     console.log("Запущен порт - "+port);
 });
+
 mongoClient.connect(url, function(err, client){
 
     if (err) return console.log(err);
@@ -45,7 +46,6 @@ mongoClient.connect(url, function(err, client){
 
     // Регистрация
     app.post("/users", (req, res) => {
-
         if ( verificationUser(req.body) ) {
             // Проверка на уникальность логина и никнейма
             testCollection.find({"loginData.login" : req.body.loginData.login})
@@ -77,7 +77,6 @@ mongoClient.connect(url, function(err, client){
 
     // Авторизация
     app.post("/login", (req, res) => {
-
         if ( verificationLogin(req.body) ){
 
             testCollection.find({"loginData.login" : req.body.login,
@@ -90,7 +89,6 @@ mongoClient.connect(url, function(err, client){
 
     // Информация о авторизированном пользователе
     app.get("/login/:id", (req, res) => {
-
         let o_id = new mongo.ObjectID(req.params.id);
         testCollection.find({"_id" : o_id}).toArray(function(err, result){
             res.status(200).send(result);
@@ -99,7 +97,6 @@ mongoClient.connect(url, function(err, client){
 
     // Информация о другом пользователе по никнейму
     app.get("/user/:nickname", (req, res) => {
-
         testCollection.find
         ({"userInfo.nickname" : req.params.nickname}).toArray(function(err, result){
             if (result.length == 0) return res.status(400).send();
@@ -154,7 +151,7 @@ mongoClient.connect(url, function(err, client){
         })
     })
 
-    // Подтверждение заявки в друзья
+    // Подтверждение запроса в друзья
     app.put("/confirmFriend", (req, res) => {
         let o_idFrom = new mongo.ObjectID(req.body.from);
         let o_idTo = new mongo.ObjectID(req.body.to);
@@ -201,6 +198,95 @@ mongoClient.connect(url, function(err, client){
 
                 let newValueTo = { $set : {"friends.incomingRequest" : requestTo,
                                            "friends.friendsList" : friendsTo} };
+
+                testCollection.updateOne(from, newValueFrom, function(err, res){
+                })
+                testCollection.updateOne(to, newValueTo, function(err, res){
+                })
+
+                res.status(200).send();
+            })
+        })
+    })
+
+    // Отменить запрос в друзья || Отказать в запросе в друзья
+    app.put("/removeRequestToFriends", (req, res) => {
+        let o_idFrom = new mongo.ObjectID(req.body.from);
+        let o_idTo = new mongo.ObjectID(req.body.to);
+        console.log("Отмена заявки в друзья");
+        console.log(req.body);
+
+        const from = {"_id" : o_idFrom};
+        const to = {"_id" : o_idTo};
+
+        testCollection.find(from).toArray(function(err, resultFrom){
+
+            testCollection.find(to).toArray(function(err, resultTo){
+
+                let outgoingRequestFrom = resultFrom[0].friends.outgoingRequest;
+                let incomingRequestTo = resultTo[0].friends.incomingRequest;
+
+                let i = 0;
+                outgoingRequestFrom.find(function(elem, index){
+                    if (elem._id == req.body.to)
+                        i = index;
+                })
+                outgoingRequestFrom.splice(i, 1);
+
+                i = 0;
+                incomingRequestTo.find(function(elem, index){
+                    if (elem._id == req.body.from)
+                        i = index;
+                })
+                incomingRequestTo.splice(i, 1);
+
+                let newValueFrom = {$set: {"friends.outgoingRequest":outgoingRequestFrom}};
+                let newValueTo = {$set: {"friends.incomingRequest":incomingRequestTo}};
+
+                testCollection.updateOne(from, newValueFrom, function(err, res){
+                })
+                testCollection.updateOne(to, newValueTo, function(err, res){
+                })
+
+                res.status(200).send();
+            })
+        })
+    })
+
+    // Удалить из друзей
+    app.put("/deleteFromFriends", (req, res) => {
+        let o_idFrom = new mongo.ObjectID(req.body.from);
+        let o_idTo = new mongo.ObjectID(req.body.to);
+        console.log("Удаление из друзей");
+        console.log(req.body);
+
+        const from = {"_id" : o_idFrom};
+        const to = {"_id" : o_idTo};
+
+        testCollection.find(from).toArray(function(err, resultFrom){
+
+            testCollection.find(to).toArray(function(err, resultTo){
+
+                let frinedsFrom = resultFrom[0].friends.friendsList;
+                let friendsTo = resultTo[0].friends.friendsList;
+
+                let i = 0;
+                frinedsFrom.find(function(elem, index){
+                    if (elem._id == req.body.to)
+                        i = index;
+                })
+                frinedsFrom.splice(i, 1);
+
+                i = 0;
+                friendsTo.find(function(elem, index){
+                    if (elem._id == req.body.from)
+                        i = index;
+                })
+                friendsTo.splice(i, 1);
+                
+                let newValueFrom = { $set: {"friends.friendsList" : frinedsFrom } };
+
+                let newValueTo = { $set : {"friends.friendsList" : friendsTo} };
 
                 testCollection.updateOne(from, newValueFrom, function(err, res){
                 })

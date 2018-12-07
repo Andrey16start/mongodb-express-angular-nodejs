@@ -73,8 +73,8 @@ export class UserComponent implements OnInit {
       this.outgoing = true;
       this.justUser = false;
 
-      this.snackBar.open("Заявка в друзья отправлена!", "", {
-        duration: 4000,
+      this.snackBar.open("Запрос в друзья отправлена!", "", {
+        duration: 4000
       });
     }, err => {
       console.log(err);
@@ -86,13 +86,48 @@ export class UserComponent implements OnInit {
     let to = this.loginService.getLogin();
 
     this.crudService.confirmFriend(from, to).subscribe(value => {
-      this.snackBar.open("Заявка в друзья принята!", "", {
-        duration: 4000,
+      this.snackBar.open("Запрос в друзья принята!", "", {
+        duration: 4000
       });
       this.incoming = false;
       this.friend = true;
     }, err => {
       console.log(err);
+    })
+  }
+
+  removeRequestToFrineds(){
+    let from = this.loginService.getLogin();
+    let to = this.user._id;
+
+    this.crudService.removeRequestToFrineds(from, to).subscribe(value => {
+      this.snackBar.open("Запрос в друзья отменена!", "", {
+        duration: 4000
+      });
+      this.outgoing = false;
+      this.justUser = true;
+    }, err => {
+      console.log(err);
+    })
+  }
+
+  deleteFromFriends(){
+    let from = this.user._id;
+    let to = this.loginService.getLogin();
+    let i: number;
+
+    this.crudService.deleteFromFriends(from, to).subscribe(value => {
+      this.user.friends.friendsList.find(function(elem, index){
+        if (elem._id == to)
+          i = index;
+      })
+      this.user.friends.friendsList.splice(i, 1);
+
+      this.snackBar.open("Пользователь удалён из друзей!", "", {
+        duration: 4000
+      });
+      this.friend = false;
+      this.justUser = true;
     })
   }
 

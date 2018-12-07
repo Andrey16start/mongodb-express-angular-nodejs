@@ -17,8 +17,16 @@
             (click)="confirmFriend()">
                 Принять заявку
             </button>
-            <button mat-raised-button color="warn" *ngIf="friend">Удалить из друзей</button>
-            <button mat-raised-button *ngIf="outgoing">Отменить заявку</button>
+
+            <button mat-raised-button color="warn" *ngIf="friend"
+            (click)="deleteFromFriends()">
+                Удалить из друзей
+            </button>
+
+            <button mat-raised-button *ngIf="outgoing"
+            (click)="removeRequestToFrineds()">
+                Отменить заявку
+            </button>
 
             <button mat-raised-button color="primary">
                 Написать сообщение
@@ -69,7 +77,9 @@
 
     <mat-card class="friends">
         <mat-card-header>
-            <mat-card-title> Друзья (192) </mat-card-title>
+            <mat-card-title>
+                Друзья ({{user.friends.friendsList.length}})
+            </mat-card-title>
         </mat-card-header>
 
         <div class="search">
@@ -82,14 +92,18 @@
             </button>
         </div>
 
-        <div class="friends-list">
+        <div class="friends-list" *ngFor="let friend of user.friends.friendsList">
             <mat-card>
                 <mat-card-header>
-                    <img src="https://www.freeiconspng.com/uploads/customers-icon-3.png" mat-card-avatar>
+                    <img src="https://www.freeiconspng.com/uploads/customers-icon-3.png"
+                    mat-card-avatar routerLink="/user/{{friend.userInfo.nickname}}">
                     <mat-card-title>
-                        Андрей Ильченко
+                        {{friend.userInfo.name}}
+                        {{friend.userInfo.lastName}}
                     </mat-card-title>
-                    <mat-card-subtitle> admin </mat-card-subtitle>
+                    <mat-card-subtitle>
+                        {{friend.userInfo.nickname}}
+                    </mat-card-subtitle>
                 </mat-card-header>
             </mat-card>
         </div>

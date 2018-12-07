@@ -22,7 +22,10 @@
                 Принять
               </button>
 
-              <button mat-raised-button color="warn">Отказать</button>
+              <button mat-raised-button color="warn"
+              (click)="refuseRequest(item._id)">
+                Отказать
+              </button>
             </span>
           </mat-card-title>
           <mat-card-subtitle> {{item.userInfo.nickname}} </mat-card-subtitle>
@@ -39,7 +42,10 @@
             {{item.userInfo.lastName}}
             {{item.userInfo.name}}
             <span>
-              <button mat-raised-button color="warn">Отменить заявку</button>
+              <button mat-raised-button color="warn"
+              (click)="removeRequestToFrineds(item._id)">
+                Отменить заявку
+              </button>
             </span>
           </mat-card-title>
           <mat-card-subtitle> {{item.userInfo.nickname}} </mat-card-subtitle>
