@@ -1,0 +1,56 @@
+<mat-spinner *ngIf="!init"></mat-spinner>
+
+<div class="wrapper" *ngIf="init">
+  <div class="interlocutors">
+    <mat-card (click)="openDialog(dialog)" *ngFor="let dialog of user.dialogs">
+      <mat-card-header>
+        <img src="https://www.freeiconspng.com/uploads/customers-icon-3.png" mat-card-avatar>
+        <mat-card-title>
+          {{dialog.interlocutor.userInfo.name}}
+          {{dialog.interlocutor.userInfo.lastName}}
+        </mat-card-title>
+        <mat-card-subtitle> {{dialog.interlocutor.userInfo.nickname}} </mat-card-subtitle>
+      </mat-card-header>
+    </mat-card>
+  </div>
+
+  <mat-card class="dialog">
+    <div class="messages">
+      <mat-card *ngFor="let msg of currentDialog.msg, index as i">
+        <h4 style="text-align: center;" *ngIf="msgDateCheck(i)">{{msg.date}}</h4>
+        <mat-card-header *ngIf="msgAuthorCheck(i)">
+            <img src="https://www.freeiconspng.com/uploads/customers-icon-3.png" mat-card-avatar>
+            <mat-card-title>
+              <span *ngIf="msg.author">
+                Вы
+              </span>
+
+              <span *ngIf="!msg.author">
+                {{currentDialog.interlocutor.userInfo.name}}
+                {{currentDialog.interlocutor.userInfo.lastName}}
+              </span>
+            </mat-card-title>
+        </mat-card-header>
+
+        <mat-card-header>
+          {{msg.text}}
+          <mat-card-subtitle>
+            {{msg.time}}
+          </mat-card-subtitle>
+        </mat-card-header>
+      </mat-card>
+    </div>
+
+    <div class="text">
+      <mat-form-field>
+        <input matInput placeholder="Введите сообщение" autocomplete="off"
+        [(ngModel)]="msgText">
+      </mat-form-field>
+
+      <button mat-mini-fab color="primary" matTooltip="Отправить сообщение"
+      (click)="sendMessage()" *ngIf="msgText">
+        <mat-icon>send</mat-icon>
+      </button>
+    </div>
+  </mat-card>
+</div>

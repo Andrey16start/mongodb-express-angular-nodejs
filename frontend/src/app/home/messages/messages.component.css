@@ -1,0 +1,38 @@
+.wrapper{
+    display: grid;
+    grid-template-columns: 3fr 7fr;
+    grid-column-gap: 10px;
+}
+
+.interlocutors{
+    height: 80vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.interlocutors mat-card:hover{
+    cursor: pointer;
+    background: rgb(245, 245, 245);
+}
+.interlocutors mat-card:active{
+    cursor: pointer;
+    background: rgb(225, 225, 225);
+}
+
+.dialog{
+    height: 80vh;
+}
+
+.messages{
+    height: 90%;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.text{
+    height: 10%;
+}
+
+.text mat-form-field{
+    width: 80%;
+}

@@ -6,7 +6,7 @@ module.exports = function User(obj){
     login.login && login.password &&
     info.name && info.lastName && info.nickname && info.birthdate && info.country &&
     friends.outgoingRequest && friends.incomingRequest && friends.friendsList &&
-    obj.msg
+    obj.dialogs
     ) return true;
 
     else return false;

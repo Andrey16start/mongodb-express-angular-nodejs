@@ -32,13 +32,13 @@
         Это обязательное поле
       </mat-error>
       <mat-error *ngIf="isControlInvalid('nickname','pattern')">
-        Доступны только буквы латинского алфавита, кирилица и цифры
+        Доступны только буквы латинского алфавита и цифры
       </mat-error>
     </mat-form-field>
 
     <mat-form-field>
       <input matInput [matDatepicker]="picker" placeholder="Дата рождения"
-      formControlName="birthdate">
+      formControlName="birthdate" autocomplete="off">
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
       <mat-error *ngIf="isControlInvalid('birthdate','required')">
@@ -60,7 +60,7 @@
         Это обязательное поле
       </mat-error>
       <mat-error *ngIf="isControlInvalid('login','pattern')">
-          Доступны только буквы латинского алфавита, кирилица, цифры и симвролы _ @ . -
+          Доступны только буквы латинского алфавита цифры и симвролы _ @ . -
       </mat-error>
     </mat-form-field>
 

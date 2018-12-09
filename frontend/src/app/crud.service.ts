@@ -57,4 +57,10 @@ export class CrudService {
     return this.httpClient.put(`${this.apiUrl}deleteFromFriends`, obj);
   }
 
+  // Отправить сообщение
+  public sendMsg(from: string, to: string, text: string){
+    const obj = {from: from, to: to, text: text}
+    return this.httpClient.put(`${this.apiUrl}sendMsg`, obj);
+  }
+
 }

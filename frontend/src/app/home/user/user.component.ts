@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import { CrudService } from 'src/app/crud.service';
 import { LoginService } from 'src/app/login.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Friend } from 'src/app/models/user';
 
 @Component({
   selector: 'app-user',
@@ -18,6 +19,8 @@ export class UserComponent implements OnInit {
   friend: boolean = false;
   outgoing: boolean = false;
   incoming: boolean = false;
+  msgPopup: boolean = false;
+  msgText: string = "";
 
   constructor(private activatedRoute: ActivatedRoute, private crudService: CrudService,
   private loginService: LoginService, private router: Router,
@@ -73,7 +76,7 @@ export class UserComponent implements OnInit {
       this.outgoing = true;
       this.justUser = false;
 
-      this.snackBar.open("Запрос в друзья отправлена!", "", {
+      this.snackBar.open("Запрос в друзья отправлен!", "", {
         duration: 4000
       });
     }, err => {
@@ -86,11 +89,20 @@ export class UserComponent implements OnInit {
     let to = this.loginService.getLogin();
 
     this.crudService.confirmFriend(from, to).subscribe(value => {
-      this.snackBar.open("Запрос в друзья принята!", "", {
-        duration: 4000
-      });
-      this.incoming = false;
-      this.friend = true;
+      this.crudService.getOne(to).subscribe(value => {
+        let friend: Friend = {
+          _id: to,
+          userInfo: value[0].userInfo
+        }
+        this.user.friends.friendsList.push(friend);
+        
+        this.snackBar.open("Запрос в друзья принят!", "", {
+          duration: 4000
+        });
+
+        this.incoming = false;
+        this.friend = true;
+      })
     }, err => {
       console.log(err);
     })
@@ -101,7 +113,7 @@ export class UserComponent implements OnInit {
     let to = this.user._id;
 
     this.crudService.removeRequestToFrineds(from, to).subscribe(value => {
-      this.snackBar.open("Запрос в друзья отменена!", "", {
+      this.snackBar.open("Запрос в друзья отменен!", "", {
         duration: 4000
       });
       this.outgoing = false;
@@ -129,6 +141,19 @@ export class UserComponent implements OnInit {
       this.friend = false;
       this.justUser = true;
     })
+  }
+
+  sendMessage(){
+    let from = this.loginService.getLogin();
+    let to = this.user._id;
+    
+    this.crudService.sendMsg(from, to, this.msgText).subscribe(value => {
+      this.msgText = "";
+      this.msgPopup = false;
+      this.snackBar.open("Сообщение отправлено!", "", {
+        duration: 4000
+      })
+    }, err => console.log(err));
   }
 
 }

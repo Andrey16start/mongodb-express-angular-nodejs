@@ -32,8 +32,8 @@ export class RegistrationComponent implements OnInit {
 
   initForm() {
     const fullNameValidator = Validators.pattern("[A-Z,a-z,а-я,А-Я]{1,}");
-    const nicknameValidator = Validators.pattern("[A-Z,a-z,а-я,А-Я,0-9]{1,}");
-    const loginValidator = Validators.pattern("[A-Z,a-z,а-я,А-Я,0-9,_,@,.,-]{1,}");
+    const nicknameValidator = Validators.pattern("[A-Z,a-z,0-9]{1,}");
+    const loginValidator = Validators.pattern("[A-Z,a-z,0-9,_,@,.,-]{1,}");
 
     this.regForm = this.fb.group({
       name: ["", [Validators.required, fullNameValidator], ],
@@ -75,11 +75,14 @@ export class RegistrationComponent implements OnInit {
         outgoingRequest: [],
         incomingRequest: []
       },
-      msg: []
+      dialogs: []
     }
 
     this.crudService.registration(obj).subscribe(value => {
-      alert("Вы успешно зарегистрировались!");
+      // alert("Вы успешно зарегистрировались!");
+      this.snackBar.open("Вы успешно зарегистрировались!", "", {
+        duration: 4000
+      });
       this.router.navigate(["/"]);
     },
     err => {

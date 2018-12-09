@@ -9,24 +9,35 @@ export class UserInfo {
     nickname: string;
     birthdate: string;
     country: string;
-    // id: number;
 }
 
 export class Msg{
-    author: UserInfo;
+    author: boolean; // True-You. False-Your interlocutor
     text: string;
     date: string;
+    time: string;
+}
+
+export class Dialog{
+    interlocutor: Friend;
+    msg: Msg[];
+}
+
+export class Friend{
+    userInfo: UserInfo;
+    _id: string;
 }
 
 export class Friends{
-    friendsList: UserInfo[];
-    outgoingRequest: UserInfo[];
-    incomingRequest: UserInfo[];
+    friendsList: Friend[];
+    outgoingRequest: Friend[];
+    incomingRequest: Friend[];
 }
 
 export class User {
     loginData: LoginData;
     userInfo: UserInfo;
     friends: Friends;
-    msg: Msg[];
+    dialogs: Dialog[];
+    _id?: string;
 }

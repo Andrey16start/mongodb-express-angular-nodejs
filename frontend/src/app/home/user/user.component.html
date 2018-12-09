@@ -1,3 +1,28 @@
+<mat-card class="message-block" *ngIf="msgPopup">
+    <mat-card-header>
+        <mat-card-title>Отправить сообщение</mat-card-title>
+        <button mat-mini-fab color="warn" matTooltip="Закрыть" class="close-popup"
+        (click)="msgPopup = false">
+            <mat-icon>clear</mat-icon>
+        </button>
+    </mat-card-header>
+
+    <mat-card-content>
+        <mat-form-field>
+            <textarea matInput placeholder="Введите сообщение"
+            [(ngModel)]="msgText"></textarea>
+        </mat-form-field>
+    </mat-card-content>
+
+    <mat-card-actions>
+        <button class="submit" mat-raised-button color="primary"
+        (click)="sendMessage()">
+            Отправить сообщение
+        </button>
+    </mat-card-actions>
+</mat-card>
+
+
 <div class="wrapper" *ngIf="init">
     <div class="profile">
         <div class="prifile-avatar">
@@ -15,7 +40,7 @@
 
             <button mat-raised-button color="primary" *ngIf="incoming"
             (click)="confirmFriend()">
-                Принять заявку
+                Принять запрос
             </button>
 
             <button mat-raised-button color="warn" *ngIf="friend"
@@ -25,10 +50,10 @@
 
             <button mat-raised-button *ngIf="outgoing"
             (click)="removeRequestToFrineds()">
-                Отменить заявку
+                Отменить запрос
             </button>
 
-            <button mat-raised-button color="primary">
+            <button mat-raised-button color="primary" (click)="msgPopup = true">
                 Написать сообщение
                 <mat-icon>mail</mat-icon>
             </button>

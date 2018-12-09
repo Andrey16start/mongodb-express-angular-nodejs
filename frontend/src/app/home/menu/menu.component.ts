@@ -10,6 +10,7 @@ import { CrudService } from 'src/app/crud.service';
 })
 export class MenuComponent implements OnInit {
   incomingRequests;
+  init: boolean = false;
 
   constructor(private loginService: LoginService, private router: Router,
     private crudService: CrudService) { }
@@ -21,6 +22,7 @@ export class MenuComponent implements OnInit {
 
       this.crudService.getOne(id).subscribe(value => {
         this.incomingRequests = value[0].friends.incomingRequest;
+        this.init = true;
       }, err => {
         console.log(err);
       })

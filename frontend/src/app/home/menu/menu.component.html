@@ -6,21 +6,21 @@
     </mat-card-header>
   </mat-card>
   
-  <mat-card class="menu-item">
+  <mat-card class="menu-item" routerLink="/messages">
     <mat-card-header>
       <img src="../../../assets/outline-mail-24px.svg">
       <span>Сообщения</span>
     </mat-card-header>
   </mat-card>
 
-  <mat-card class="menu-item" routerLink="/friends" *ngIf="incomingRequests">
-    <mat-card-header *ngIf="incomingRequests.length">
+  <mat-card class="menu-item" routerLink="/friends" *ngIf="init">
+    <mat-card-header *ngIf="incomingRequests.length > 0">
       <img src="../../../assets/outline-group-24px.svg">
       <span matBadge="{{incomingRequests.length}}" matBadgeOverlap="false"
       matBadgeColor="warn">Друзья</span>
     </mat-card-header>
 
-    <mat-card-header *ngIf="!incomingRequests.length">
+    <mat-card-header *ngIf="incomingRequests.length == 0">
       <img src="../../../assets/outline-group-24px.svg">
       <span>Друзья</span>
     </mat-card-header>

@@ -51,7 +51,7 @@ export class FriendsComponent implements OnInit {
       this.user.friends.incomingRequest.splice(indexIncoming, 1);
       this.user.friends.friendsList.push(info);
 
-      this.snackBar.open("Запрос в друзья принята!", "", {
+      this.snackBar.open("Запрос в друзья принят!", "", {
         duration: 4000,
       });
     }, err => {
@@ -94,7 +94,7 @@ export class FriendsComponent implements OnInit {
       })
       this.user.friends.outgoingRequest.splice(indexOutgoing, 1);
 
-      this.snackBar.open("Запрос в друзья отменена!", "", {
+      this.snackBar.open("Запрос в друзья отменён!", "", {
         duration: 4000
       });
     }, err => {

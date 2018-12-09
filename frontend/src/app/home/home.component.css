@@ -45,12 +45,9 @@
 .friends{
     display: grid;
     max-height: 550px;
-}
-
-.friends-list{
     overflow-x: hidden;
     overflow-x: auto;
-    max-height: 400px;
+    margin-bottom: 20px;
 }
 
 .friends .search{

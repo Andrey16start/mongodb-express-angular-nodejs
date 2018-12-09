@@ -3,48 +3,44 @@
 <div class="wrapper" *ngIf="init">
   <mat-card class="requests-block">
     <div class="requests">
-      <button mat-raised-button color="primary" (click)="selectIncoming()">Входящие заявки</button>
+      <button mat-raised-button color="primary" (click)="selectIncoming()">Входящие заяпросы</button>
 
-      <button mat-raised-button color="primary" (click)="selectOutgoing()">Исходящие заявки</button>
+      <button mat-raised-button color="primary" (click)="selectOutgoing()">Исходящие запросы</button>
     </div>
 
-    <div *ngFor="let item of user.friends.incomingRequest" class="request">
-      <mat-card *ngIf="incoming">
+    <div class="request" *ngIf="incoming">
+      <mat-card *ngFor="let item of user.friends.incomingRequest">
         <mat-card-header>
-          <img src="https://www.freeiconspng.com/uploads/customers-icon-3.png" mat-card-avatar
-          routerLink="/user/{{item.userInfo.nickname}}">
+          <img src="https://www.freeiconspng.com/uploads/customers-icon-3.png" mat-card-avatar routerLink="/user/{{item.userInfo.nickname}}">
           <mat-card-title>
             {{item.userInfo.lastName}}
             {{item.userInfo.name}}
-            <span>
-              <button mat-raised-button color="primary"
-              (click)="confirmFriend(item._id)">
-                Принять
-              </button>
-
-              <button mat-raised-button color="warn"
-              (click)="refuseRequest(item._id)">
-                Отказать
-              </button>
-            </span>
           </mat-card-title>
           <mat-card-subtitle> {{item.userInfo.nickname}} </mat-card-subtitle>
         </mat-card-header>
+        
+        <mat-card-actions>
+            <button mat-raised-button color="primary" (click)="confirmFriend(item._id)">
+              Принять
+            </button>
+
+            <button mat-raised-button color="warn" (click)="refuseRequest(item._id)">
+              Отказать
+            </button>
+          </mat-card-actions>
       </mat-card>
     </div>
 
-    <div *ngFor="let item of user.friends.outgoingRequest" class="request">
-      <mat-card *ngIf="outgoing">
+    <div class="request" *ngIf="outgoing">
+      <mat-card *ngFor="let item of user.friends.outgoingRequest">
         <mat-card-header>
-          <img src="https://www.freeiconspng.com/uploads/customers-icon-3.png" mat-card-avatar
-          routerLink="/user/{{item.userInfo.nickname}}">
+          <img src="https://www.freeiconspng.com/uploads/customers-icon-3.png" mat-card-avatar routerLink="/user/{{item.userInfo.nickname}}">
           <mat-card-title>
             {{item.userInfo.lastName}}
             {{item.userInfo.name}}
             <span>
-              <button mat-raised-button color="warn"
-              (click)="removeRequestToFrineds(item._id)">
-                Отменить заявку
+              <button mat-raised-button color="warn" (click)="removeRequestToFrineds(item._id)">
+                Отменить запрос
               </button>
             </span>
           </mat-card-title>
@@ -72,8 +68,7 @@
     <div class="friends-list" *ngFor="let friend of user.friends.friendsList">
       <mat-card>
         <mat-card-header>
-          <img src="https://www.freeiconspng.com/uploads/customers-icon-3.png" mat-card-avatar
-          routerLink="/user/{{friend.userInfo.nickname}}">
+          <img src="https://www.freeiconspng.com/uploads/customers-icon-3.png" mat-card-avatar routerLink="/user/{{friend.userInfo.nickname}}">
           <mat-card-title>
             {{friend.userInfo.lastName}}
             {{friend.userInfo.name}}

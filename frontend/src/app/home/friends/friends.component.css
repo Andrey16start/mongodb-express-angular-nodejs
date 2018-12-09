@@ -57,3 +57,8 @@
 .friends-list mat-card img:hover{
     cursor: pointer;
 }
+
+.request mat-card{
+    box-shadow: none;
+    margin-top: 0px;
+}
