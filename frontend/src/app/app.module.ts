@@ -16,6 +16,7 @@ import { SearchComponent } from './home/search/search.component';
 import { UserComponent } from './home/user/user.component';
 import { FriendsComponent } from './home/friends/friends.component';
 import { MessagesComponent } from './home/messages/messages.component';
+import { Error404Component } from './errors/error404/error404.component';
 
 import { AppRoutingModule } from './app.routing.module';
 import { MaterialModule } from './material.module';
@@ -34,7 +35,8 @@ import { LoginService } from './login.service';
     SearchComponent,
     UserComponent,
     FriendsComponent,
-    MessagesComponent
+    MessagesComponent,
+    Error404Component
   ],
   imports: [
     BrowserModule,
