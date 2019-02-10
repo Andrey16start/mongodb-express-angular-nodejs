@@ -1,55 +1,6 @@
 <mat-spinner *ngIf="!init"></mat-spinner>
 
 <div class="wrapper" *ngIf="init">
-  <mat-card class="requests-block">
-    <div class="requests">
-      <button mat-raised-button color="primary" (click)="selectIncoming()">Входящие заяпросы</button>
-
-      <button mat-raised-button color="primary" (click)="selectOutgoing()">Исходящие запросы</button>
-    </div>
-
-    <div class="request" *ngIf="incoming">
-      <mat-card *ngFor="let item of user.friends.incomingRequest">
-        <mat-card-header>
-          <img src="https://www.freeiconspng.com/uploads/customers-icon-3.png" mat-card-avatar routerLink="/user/{{item.userInfo.nickname}}">
-          <mat-card-title>
-            {{item.userInfo.lastName}}
-            {{item.userInfo.name}}
-          </mat-card-title>
-          <mat-card-subtitle> {{item.userInfo.nickname}} </mat-card-subtitle>
-        </mat-card-header>
-        
-        <mat-card-actions>
-            <button mat-raised-button color="primary" (click)="confirmFriend(item._id)">
-              Принять
-            </button>
-
-            <button mat-raised-button color="warn" (click)="refuseRequest(item._id)">
-              Отказать
-            </button>
-          </mat-card-actions>
-      </mat-card>
-    </div>
-
-    <div class="request" *ngIf="outgoing">
-      <mat-card *ngFor="let item of user.friends.outgoingRequest">
-        <mat-card-header>
-          <img src="https://www.freeiconspng.com/uploads/customers-icon-3.png" mat-card-avatar routerLink="/user/{{item.userInfo.nickname}}">
-          <mat-card-title>
-            {{item.userInfo.lastName}}
-            {{item.userInfo.name}}
-            <span>
-              <button mat-raised-button color="warn" (click)="removeRequestToFrineds(item._id)">
-                Отменить запрос
-              </button>
-            </span>
-          </mat-card-title>
-          <mat-card-subtitle> {{item.userInfo.nickname}} </mat-card-subtitle>
-        </mat-card-header>
-      </mat-card>
-    </div>
-  </mat-card>
-
   <mat-card class="friends">
     <mat-card-header>
       <mat-card-title> Друзья ({{user.friends.friendsList.length}}) </mat-card-title>
@@ -78,4 +29,54 @@
       </mat-card>
     </div>
   </mat-card>
+
+  <mat-card class="requests-block">
+    <div class="requests">
+      <button mat-raised-button [color]="incoming ? 'basic' : 'primary'" (click)="selectIncoming()">Входящие заяпросы</button>
+
+      <button mat-raised-button [color]="outgoing ? 'basic' : 'primary'" (click)="selectOutgoing()">Исходящие запросы</button>
+    </div>
+
+    <div class="request" *ngIf="incoming">
+      <mat-card *ngFor="let item of user.friends.incomingRequest">
+        <mat-card-header>
+          <img src="https://www.freeiconspng.com/uploads/customers-icon-3.png" mat-card-avatar routerLink="/user/{{item.userInfo.nickname}}">
+          <mat-card-title>
+            {{item.userInfo.lastName}}
+            {{item.userInfo.name}}
+          </mat-card-title>
+          <mat-card-subtitle> {{item.userInfo.nickname}} </mat-card-subtitle>
+        </mat-card-header>
+
+        <mat-card-actions>
+          <button mat-raised-button color="primary" (click)="confirmFriend(item._id)">
+            Принять
+          </button>
+
+          <button mat-raised-button color="warn" (click)="refuseRequest(item._id)">
+            Отказать
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+
+    <div class="request" *ngIf="outgoing">
+      <mat-card *ngFor="let item of user.friends.outgoingRequest">
+        <mat-card-header>
+          <img src="https://www.freeiconspng.com/uploads/customers-icon-3.png" mat-card-avatar routerLink="/user/{{item.userInfo.nickname}}">
+          <mat-card-title>
+            {{item.userInfo.lastName}}
+            {{item.userInfo.name}}
+            <span>
+              <button mat-raised-button color="warn" (click)="removeRequestToFrineds(item._id)">
+                Отменить запрос
+              </button>
+            </span>
+          </mat-card-title>
+          <mat-card-subtitle> {{item.userInfo.nickname}} </mat-card-subtitle>
+        </mat-card-header>
+      </mat-card>
+    </div>
+  </mat-card>
+
 </div>

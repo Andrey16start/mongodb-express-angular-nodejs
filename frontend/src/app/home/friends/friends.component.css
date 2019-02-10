@@ -15,7 +15,7 @@
 }
 
 .requests-block{
-    height: 80vh;
+    max-height: 80vh;
     overflow-x: hidden;
     overflow-y: auto;
 }
@@ -61,4 +61,21 @@
 .request mat-card{
     box-shadow: none;
     margin-top: 0px;
+}
+
+@media screen and (max-width: 720px){
+    .wrapper{
+        grid-template-columns: 1fr;
+    }
+
+    .friends{
+        margin-bottom: 10px;
+    }
+}
+
+@media screen and (max-width: 450px){
+    .requests{
+        grid-template-columns: 1fr;
+        grid-row-gap: 10px;
+    }
 }
