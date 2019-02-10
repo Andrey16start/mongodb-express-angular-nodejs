@@ -43,8 +43,8 @@
 
     <div class="text">
       <mat-form-field>
-        <input matInput placeholder="Введите сообщение" autocomplete="off"
-        [(ngModel)]="msgText">
+        <textarea matInput placeholder="Введите сообщение" autocomplete="off"
+        [(ngModel)]="msgText" class="msg-text"></textarea>
       </mat-form-field>
 
       <button mat-mini-fab color="primary" matTooltip="Отправить сообщение"

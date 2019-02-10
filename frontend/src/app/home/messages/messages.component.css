@@ -24,15 +24,38 @@
 }
 
 .messages{
-    height: 90%;
+    height: 85%;
     overflow-x: hidden;
     overflow-y: auto;
 }
 
 .text{
-    height: 10%;
+    height: 15%;
 }
 
 .text mat-form-field{
     width: 80%;
+}
+
+.msg-text{
+    height: 70px;
+}
+
+@media screen and (max-width: 900px){
+    .wrapper{
+        grid-template-columns: 1fr;
+    }
+
+    .interlocutors{
+        height: auto;
+        overflow-x: auto;
+        overflow-y: hidden;
+        margin-bottom: 10px;
+        display: flex;
+    }
+
+    .interlocutors mat-card{
+        display: inline-block;
+        border-radius: 0px;
+    }
 }
